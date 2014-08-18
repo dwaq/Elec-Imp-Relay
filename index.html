@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Coffee Imp</title>
+
+		<!-- Add to homescreen for Safari on iOS -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="Coffee Imp">
+		<link rel="apple-touch-icon" href="/Elec-Imp-Relay/apple-icon-coffee.png">
+
+		<!-- Various stylesheets -->
+		<link rel="stylesheet" href="styles/h5bp.css">
+		<link rel="stylesheet" href="styles/components.css">
+		<link rel="stylesheet" href="styles/main.css">
+	</head>
+
+	<!-- Decode the parameters and check and make sure agentURL is present -->
+	<body onload="linkDecode(); agentURLalert();">
+
+		<header class="app-bar promote-layer">
+			<div class="app-bar-container">
+				<h1 class="logo" align="center" >Coffee Imp</h1>
+			</div>
+		</header>
+
+
+		<main>
+			<center><br>
+				<!-- Display alerts here if there are any -->
+				<div class="g--half g--centered" style="background:red;" id="alerts"></div>
+
+				<h2 id="toggle">Toggle the power</h2>
+				<button class="button--on"  onclick="addOrUpdateUrlParam('relay', 1);">Turn on</button>
+				<button class="button--off" onclick="addOrUpdateUrlParam('relay', 0);">Turn off</button>
+
+				<h2 id="cups">&#9749; Number of cups &#9749;</h2>
+				<button class="button--cups" onclick="addOrUpdateUrlParam('cups', 2);">2</button>
+				<button class="button--cups" onclick="addOrUpdateUrlParam('cups', 3);">3</button>
+				<button class="button--cups" onclick="addOrUpdateUrlParam('cups', 4);">4</button>
+			</center>
+
+		</main>
+
+	<!-- used to open all links inside the app -->
+	<script src="scripts/link-fix.js"></script>
+
+	<!-- used to check URL parameters -->
+	<script src="scripts/link-decode.js"></script>
+
+	<!-- Made with love using Web Starter Kit -->
+	</body>
+
+</html>
