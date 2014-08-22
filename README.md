@@ -12,6 +12,6 @@ electric imp-Controlled 120Vac Relay Switcher
 
 View online at [http://tinkerer.us/Elec-Imp-Relay/](http://tinkerer.us/Elec-Imp-Relay/)
 
-Read the full details on my blog at [http://tinkeringetc.blogspot.com/2013/12/electric-imp-controlled-120vac-relay.html](http://tinkeringetc.blogspot.com/2013/12/electric-imp-controlled-120vac-relay.html)
+Read about the hardware and initial version of software at [http://tinkeringetc.blogspot.com/2013/12/electric-imp-controlled-120vac-relay.html](http://tinkeringetc.blogspot.com/2013/12/electric-imp-controlled-120vac-relay.html) and the software update at [http://tinkeringetc.blogspot.com/2014/08/electric-imp-controlled-120vac-relay.html](http://tinkeringetc.blogspot.com/2014/08/electric-imp-controlled-120vac-relay.html)
 
 This work is licensed under a Creative Commons Attribution 3.0 Unported License.
