@@ -1,4 +1,4 @@
-// RETURN_ON_ERROR tells the imp to continue running as normal 
+// RETURN_ON_ERROR tells the imp to continue running as normal
 // when the WiFi connection is lost.
 server.setsendtimeoutpolicy(RETURN_ON_ERROR);
 
@@ -48,10 +48,14 @@ function setTime(numberCups) {
     stopTime = currentTime + timeCount
     server.log("It is now " + currentTime + ". The relay will turn off at " + stopTime);
 	relay.write(1); // turn relay on
-    
+
     // loop until time to turn off
     // if longer than 1 min, 50 sec, will disconnect from WiFi
    while (hardware.millis() < stopTime){
+		// every minute passes, send log
+        if ((hardware.millis()-currentTime)%min2millisec == 0){
+            server.log((hardware.millis()-currentTime)/min2millisec + " minutes have passed")
+        }
         // let pressing the button cancel the timer
         if (button.read() == 1) { // button has been pressed
     		while (button.read() == 1) {} // wait til button has been released
@@ -86,6 +90,6 @@ function disconnectHandler(reason){
         server.log("Device connected")
     }
 }
- 
+
 // Register the disconnection handler as the on unexpected disconnect callback
 server.onunexpecteddisconnect(disconnectHandler)
