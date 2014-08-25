@@ -14,6 +14,8 @@ button <- hardware.pin1
 // variables for delaying
 // variable to convert minutes to seconds
 min2sec <- 60
+// used to store amount of delay
+timeCount <- 0
 
 
 // function to  toggle relay from the switch
@@ -39,25 +41,34 @@ function setTimer(numberCups) {
     timeCount = (2.5 + numberCups) * min2sec
     server.log("Set relay for " + timeCount/min2sec + " minutes")
     // configure button to turn off during timer
-    button.configure(DIGITAL_IN_PULLDOWN, turnOffRelay)
+    button.configure(DIGITAL_IN_PULLDOWN, cancelTimerByButton)
     // turn relay on
 	relay.write(1)
 	// create timer
 	timer <- imp.wakeup(timeCount, turnOffRelay)
 }
 
+function cancelTimerByButton(){
+    if (button.read() == 1) { // button has been pressed
+		while (button.read() == 1) {} // wait til button has been released
+		// cancel timer
+	    imp.cancelwakeup(timer)
+	    server.log("Timer interrupted by button")
+	    server.log("The relay is now off")
+	    // turn off relay
+	    relay.write(0)
+	    // set button back to normal operation
+	    button.configure(DIGITAL_IN_PULLDOWN, toggleRelay)
+	}
+}
 
 // function to turn off relay from timer function
 function turnOffRelay() {
-	if (button.read() == 1) { // button has been pressed
-		while (button.read() == 1) {} // wait til button has been released
-		// turn off relay
-		relay.write(0)
-		// cancel timer (if button was pressed)
-		imp.cancelwakeup(timer)
-		// set button back to normal operation
-		button.configure(DIGITAL_IN_PULLDOWN, toggleRelay)
-	}
+	// turn off relay
+	relay.write(0)
+	server.log("The relay is now off")
+	// set button back to normal operation
+	button.configure(DIGITAL_IN_PULLDOWN, toggleRelay)
 }
 
 // configure button to be a digital input that is pulled down to ground
