@@ -33,6 +33,8 @@ function setRelay(relayState) {
 		try {
 			// cancel timer
 			imp.cancelwakeup(timer)
+			// set button back to normal operation
+		    button.configure(DIGITAL_IN_PULLDOWN, toggleRelay)
 		} catch (ex) {
 			// timer hasn't been called yet
 			server.log(ex)
