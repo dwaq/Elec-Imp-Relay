@@ -16,19 +16,18 @@ var urlParams;
 function addOrUpdateUrlParam(name, value)
 {
   var href = window.location.href;
-  var regex = new RegExp("[&\\?]" + name + "=");
-  if(regex.test(href))
-  {
-    regex = new RegExp("([&\\?])" + name + "=\\d+");
-    window.location.href = href.replace(regex, "$1" + name + "=" + value);
+  // find location of "&"
+  // & splits the agentURL and the other params
+  var ampersand = href.search("&");
+  // and if it's found
+  if (ampersand > 0) {
+      // delete everything after that
+      // because we only want one other param
+      href = href.slice(0,ampersand);
   }
-  else
-  {
-    if(href.indexOf("?") > -1)
+  // add new URL param after agentURL
+  if(href.indexOf("?") > -1)
       window.location.href = href + "&" + name + "=" + value;
-    else
-      window.location.href = href + "?" + name + "=" + value;
-  }
 }
 
 function httpGet(theUrl)
@@ -69,5 +68,3 @@ function agentURLalert(){
 		document.getElementById("alerts").innerHTML="<br>The agent URL parameter is missing.<br>Please update the link to include<br>?agentURL=xxxxxxxxxxxx<br><br>"
 	}
 }
-
-
